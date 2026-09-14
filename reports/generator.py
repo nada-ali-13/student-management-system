@@ -52,3 +52,45 @@ def generate_student_report(student_id):
 
     return "\n".join(report)
 
+
+def generate_course_report(course_id):
+    course = get_course_by_id(course_id)
+
+    if course is None:
+        return "Course not found"
+
+    enrollments = get_course_enrollments(course_id)
+
+    status = "Active" if course.active else "Inactive"
+
+    report = []
+
+    report.append("================================")
+    report.append("         COURSE REPORT")
+    report.append("================================")
+    report.append(f"ID: {course.id}")
+    report.append(f"Name: {course.name}")
+    report.append(f"Description: {course.description}")
+    report.append(f"Fees: {course.fees}")
+    report.append(f"Start Date: {course.start_date}")
+    report.append(f"End Date: {course.end_date}")
+    report.append(f"Status: {status}")
+    report.append(f"Students enrolled: {len(enrollments)}")
+    report.append("")
+
+    if not enrollments:
+        report.append("No students enrolled.")
+    else:
+        report.append("Students:")
+
+        for enrollment in enrollments:
+            student = get_student_by_id(enrollment.student_id)
+
+            if student:
+                payment = "Paid" if enrollment.paid else "Unpaid"
+
+                report.append(
+                    f"- {student.name} ({payment})"
+                )
+
+    return "\n".join(report)
