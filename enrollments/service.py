@@ -69,3 +69,11 @@ def add_enrollment(
     )
 
     return enrollment
+def get_student_enrollments(student_id):
+    enrollments = get_all_enrollments()
+
+    return [
+        enrollment
+        for enrollment in enrollments
+        if enrollment.student_id == student_id
+    ]
