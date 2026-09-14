@@ -11,3 +11,11 @@ def load_data(file_path):
     except FileNotFoundError:
         print("The file does not exist!")
         return []
+
+def save_data(file_path, data):
+    try:
+        with open(file_path, "w", encoding="utf-8") as file:
+            json.dump(data, file, indent=4, ensure_ascii=False)
+    except FileNotFoundError:
+        print("The file does not exist!")
+        return []
