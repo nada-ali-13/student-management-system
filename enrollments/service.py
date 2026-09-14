@@ -99,3 +99,18 @@ def update_payment_status(enrollment_id, paid):
                 ENROLLMENTS_FILE,
                 [enrollment.to_dict() for enrollment in enrollments]
             )
+
+
+def delete_enrollment(enrollment_id):
+    enrollments = get_all_enrollments()
+
+    for enrollment in enrollments:
+        if enrollment.id == enrollment_id:
+            enrollments.remove(enrollment)
+
+            save_data(
+                ENROLLMENTS_FILE,
+                [enrollment.to_dict() for enrollment in enrollments]
+            )
+
+            return True
