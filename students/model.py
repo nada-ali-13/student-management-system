@@ -14,3 +14,12 @@ class Student:
             "email": self.email,
             "phone": self.phone
         }
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            data["id"],
+            data["name"],
+            data["age"],
+            data["email"],
+            data["phone"]
+        )
