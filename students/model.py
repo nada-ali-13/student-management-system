@@ -5,3 +5,12 @@ class Student:
         self.age = age
         self.email = email
         self.phone = phone
+        
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "age": self.age,
+            "email": self.email,
+            "phone": self.phone
+        }
