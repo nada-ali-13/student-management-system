@@ -77,3 +77,12 @@ def get_student_enrollments(student_id):
         for enrollment in enrollments
         if enrollment.student_id == student_id
     ]
+
+def get_course_enrollments(course_id):
+    enrollments = get_all_enrollments()
+
+    return [
+        enrollment
+        for enrollment in enrollments
+        if enrollment.course_id == course_id
+    ]
