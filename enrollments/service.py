@@ -86,3 +86,16 @@ def get_course_enrollments(course_id):
         for enrollment in enrollments
         if enrollment.course_id == course_id
     ]
+
+
+def update_payment_status(enrollment_id, paid):
+    enrollments = get_all_enrollments()
+
+    for enrollment in enrollments:
+        if enrollment.id == enrollment_id:
+            enrollment.paid = paid
+
+            save_data(
+                ENROLLMENTS_FILE,
+                [enrollment.to_dict() for enrollment in enrollments]
+            )
