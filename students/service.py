@@ -47,33 +47,22 @@ def get_student_by_id(student_id):
 
     return None
 
-def add_student(name, age, email, phone):
 
-    validate_name(name)
-    validate_age(age)
-    validate_email(email)
-    validate_phone(phone)
-
+def update_student(student_id, name, age, email, phone):
     students = get_all_students()
 
-    new_id = max(
-        [student.id for student in students],
-        default=0
-    ) + 1
+    for student in students:
+        if student.id == student_id:
+            student.name = name
+            student.age = age
+            student.email = email
+            student.phone = phone
 
-    student = Student(
-        new_id,
-        name,
-        age,
-        email,
-        phone
-    )
+            save_data(
+                STUDENTS_FILE,
+                [student.to_dict() for student in students]
+            )
 
-    students.append(student)
+            return student
 
-    save_data(
-        STUDENTS_FILE,
-        [student.to_dict() for student in students]
-    )
-
-    return student
+    return None
