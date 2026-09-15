@@ -66,3 +66,19 @@ def update_student(student_id, name, age, email, phone):
             return student
 
     return None
+
+def delete_student(student_id):
+    students = get_all_students()
+
+    for student in students:
+        if student.id == student_id:
+            students.remove(student)
+
+            save_data(
+                STUDENTS_FILE,
+                [student.to_dict() for student in students]
+            )
+
+            return True
+
+    return False
