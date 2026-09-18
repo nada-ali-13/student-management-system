@@ -26,3 +26,4 @@ class Enrollment:
             data["student_id"],
             data["course_id"],
             data["paid"],
+        )
